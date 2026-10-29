@@ -1,0 +1,79 @@
+<core:FragmentDefinition
+   xmlns="sap.m"
+   xmlns:core="sap.ui.core">
+   <Dialog
+      id="reviewDialog"
+      title="{i18n>writeReviewTitle}"
+      contentWidth="32rem"
+      stretch="{device>/system/phone}">
+      <content>
+         <VBox class="sapUiSmallMargin">
+            <Title
+               class="sapUiSmallMarginBottom"
+               text="{product>name}"
+               level="H3"
+               wrapping="true"/>
+
+            <!-- rating -->
+            <Label
+               text="{i18n>reviewRatingLabel}"
+               required="true"
+               labelFor="reviewRating"/>
+            <RatingIndicator
+               id="reviewRating"
+               value="{reviewDraft>/rating}"
+               maxValue="5"
+               iconSize="2rem"
+               change=".onReviewDraftChange"/>
+            <Text
+               class="sapUiTinyMarginBottom"
+               text="{i18n>reviewRatingHint}"
+               visible="{= ${reviewDraft>/rating} === 0 }"/>
+
+            <!-- name -->
+            <Label
+               class="sapUiSmallMarginTop"
+               text="{i18n>reviewNameLabel}"
+               required="true"
+               labelFor="reviewAuthor"/>
+            <Input
+               id="reviewAuthor"
+               maxLength="40"
+               value="{reviewDraft>/author}"
+               valueState="{reviewDraft>/valueStates/author}"
+               valueStateText="{i18n>reviewNameError}"
+               liveChange=".onReviewDraftChange"/>
+
+            <!-- comment -->
+            <Label
+               class="sapUiSmallMarginTop"
+               text="{i18n>reviewCommentLabel}"
+               required="true"
+               labelFor="reviewComment"/>
+            <TextArea
+               id="reviewComment"
+               width="100%"
+               rows="5"
+               maxLength="500"
+               showExceededText="true"
+               placeholder="{i18n>reviewCommentPlaceholder}"
+               value="{reviewDraft>/comment}"
+               valueState="{reviewDraft>/valueStates/comment}"
+               valueStateText="{i18n>reviewCommentError}"
+               liveChange=".onReviewDraftChange"/>
+         </VBox>
+      </content>
+      <beginButton>
+         <Button
+            text="{i18n>submitReview}"
+            type="Emphasized"
+            enabled="{reviewDraft>/canSubmit}"
+            press=".onSubmitReview"/>
+      </beginButton>
+      <endButton>
+         <Button
+            text="{i18n>cancelReview}"
+            press=".onCloseReviewDialog"/>
+      </endButton>
+   </Dialog>
+</core:FragmentDefinition>

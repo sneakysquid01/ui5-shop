@@ -1,0 +1,26 @@
+/* UI5 Shop - custom styles
+   All rules are prefixed with .shopApp so they only affect this app */
+
+/* light background behind product images */
+.shopApp .productCarousel {
+	background-color: #f5f6f7;
+	border-radius: 0.5rem;
+}
+
+/* weather page: big emoji and temperature in the current weather card */
+.shopApp .weatherEmoji {
+	font-size: 3.5rem;
+	line-height: 1;
+}
+
+.shopApp .weatherTemperature {
+	font-size: 2.5rem;
+	font-weight: bold;
+	line-height: 1.1;
+}
+
+/* weather page: emoji in the 7-day list */
+.shopApp .weatherDayEmoji {
+	font-size: 1.75rem;
+	line-height: 1;
+}

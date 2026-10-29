@@ -1,0 +1,9 @@
+<mvc:View
+   controllerName="ui5.shop.controller.App"
+   xmlns="sap.m"
+   xmlns:mvc="sap.ui.core.mvc"
+   displayBlock="true">
+   <App
+      id="app"
+      class="shopApp"/>
+</mvc:View>

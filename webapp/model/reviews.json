@@ -1,0 +1,39 @@
+{
+  "Reviews": [
+    { "reviewId": "S001", "productId": "P1001", "author": "Riya Sharma", "rating": 5, "comment": "Fantastic noise cancelling and the battery easily lasts a whole week of commuting. Very comfortable even after hours.", "date": "2026-09-02T10:15:00.000Z" },
+    { "reviewId": "S002", "productId": "P1001", "author": "Kabir Mehta", "rating": 4, "comment": "Great sound quality. Slightly tight on the head for the first few days, but it loosens up.", "date": "2026-08-18T16:40:00.000Z" },
+
+    { "reviewId": "S003", "productId": "P1002", "author": "Ananya Rao", "rating": 4, "comment": "Bright display and accurate step counting. Sleep tracking is useful. Wish the strap felt a bit more premium.", "date": "2026-09-10T07:30:00.000Z" },
+    { "reviewId": "S004", "productId": "P1002", "author": "Dev Patel", "rating": 5, "comment": "Battery really does last about a week. Notifications work perfectly with my phone.", "date": "2026-07-25T19:05:00.000Z" },
+
+    { "reviewId": "S005", "productId": "P1003", "author": "Ishaan Verma", "rating": 5, "comment": "Took it to the beach and it survived a splash with no problem. The bass is surprisingly deep for the size.", "date": "2026-08-30T12:00:00.000Z" },
+    { "reviewId": "S006", "productId": "P1003", "author": "Meera Joshi", "rating": 4, "comment": "Loud and clear. Pairing two speakers for stereo was easy. Gets slightly distorted at maximum volume.", "date": "2026-06-14T09:20:00.000Z" },
+
+    { "reviewId": "S007", "productId": "P1004", "author": "Arjun Nair", "rating": 5, "comment": "Typing feels amazing and the RGB lighting looks great at night. Swapping switches was really simple.", "date": "2026-09-05T21:10:00.000Z" },
+    { "reviewId": "S008", "productId": "P1004", "author": "Sana Qureshi", "rating": 4, "comment": "Solid build quality. A bit loud for open offices, but perfect for home use.", "date": "2026-08-01T11:45:00.000Z" },
+
+    { "reviewId": "S009", "productId": "P1005", "author": "Rohit Gupta", "rating": 4, "comment": "Comfortable for long work days and the silent clicks are a big plus in meetings.", "date": "2026-09-12T08:00:00.000Z" },
+    { "reviewId": "S010", "productId": "P1005", "author": "Neha Kapoor", "rating": 5, "comment": "Switching between my laptop and tablet with one button is so convenient. Battery lasts ages.", "date": "2026-07-09T14:30:00.000Z" },
+
+    { "reviewId": "S011", "productId": "P1006", "author": "Vikram Singh", "rating": 4, "comment": "Stabilisation is impressive on bike rides. The front screen makes vlogging much easier.", "date": "2026-08-22T17:50:00.000Z" },
+    { "reviewId": "S012", "productId": "P1006", "author": "Priya Iyer", "rating": 4, "comment": "Great 4K footage underwater. Battery drains quickly at 4K60, so carry a spare.", "date": "2026-06-28T10:10:00.000Z" },
+
+    { "reviewId": "S013", "productId": "P1007", "author": "Aditya Kumar", "rating": 4, "comment": "Lightweight and I forget I am wearing it. Good value for the price.", "date": "2026-09-01T06:45:00.000Z" },
+    { "reviewId": "S014", "productId": "P1007", "author": "Fatima Khan", "rating": 4, "comment": "Accurate heart-rate readings during workouts. The app could be a little simpler.", "date": "2026-07-17T18:20:00.000Z" },
+
+    { "reviewId": "S015", "productId": "P1008", "author": "Karan Malhotra", "rating": 5, "comment": "Charges my phone almost four times. Fast charging works well and the display is handy.", "date": "2026-09-08T13:15:00.000Z" },
+    { "reviewId": "S016", "productId": "P1008", "author": "Pooja Desai", "rating": 4, "comment": "A bit heavy to carry in a pocket, but perfect for travel.", "date": "2026-08-12T20:00:00.000Z" },
+
+    { "reviewId": "S017", "productId": "P1009", "author": "Rahul Bose", "rating": 4, "comment": "Noise cancelling is good for the price and calls sound clear. The case fits easily in my pocket.", "date": "2026-09-11T09:40:00.000Z" },
+    { "reviewId": "S018", "productId": "P1009", "author": "Tanya Arora", "rating": 5, "comment": "Use them at the gym every day and they never fall out. Transparency mode is great outdoors.", "date": "2026-07-30T07:05:00.000Z" },
+
+    { "reviewId": "S019", "productId": "P1010", "author": "Siddharth Rao", "rating": 4, "comment": "Surround sound really helps in shooters. Mic quality is good enough for team chat.", "date": "2026-08-27T22:30:00.000Z" },
+    { "reviewId": "S020", "productId": "P1010", "author": "Nikita Shah", "rating": 4, "comment": "Comfortable for long sessions, though it gets a little warm after a few hours.", "date": "2026-06-20T15:00:00.000Z" },
+
+    { "reviewId": "S021", "productId": "P1011", "author": "Aman Chopra", "rating": 5, "comment": "Copied a 50 GB video project in a couple of minutes. Tiny and feels very sturdy.", "date": "2026-09-06T11:25:00.000Z" },
+    { "reviewId": "S022", "productId": "P1011", "author": "Lavanya Pillai", "rating": 5, "comment": "Works with my laptop, phone and console. Including both cables is a nice touch.", "date": "2026-08-05T16:10:00.000Z" },
+
+    { "reviewId": "S023", "productId": "P1012", "author": "Harsh Agarwal", "rating": 4, "comment": "One cable for monitor, charging and USB drives. Gets warm but works reliably.", "date": "2026-09-03T10:50:00.000Z" },
+    { "reviewId": "S024", "productId": "P1012", "author": "Zoya Mirza", "rating": 4, "comment": "4K output works fine on my monitor. Wish the cable were a little longer.", "date": "2026-07-12T12:35:00.000Z" }
+  ]
+}

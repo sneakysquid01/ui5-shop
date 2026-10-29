@@ -1,0 +1,145 @@
+<mvc:View
+   controllerName="ui5.shop.controller.OrderConfirmation"
+   xmlns="sap.m"
+   xmlns:core="sap.ui.core"
+   xmlns:mvc="sap.ui.core.mvc"
+   xmlns:form="sap.ui.layout.form">
+   <Page
+      id="orderConfirmationPage"
+      title="{i18n>orderConfirmationPageTitle}"
+      core:require="{
+         Formatter: 'ui5/shop/model/formatter'
+      }">
+      <headerContent>
+         <core:Fragment
+            fragmentName="ui5.shop.view.fragments.CartButton"
+            type="XML"/>
+      </headerContent>
+      <content>
+
+         <!-- success message -->
+         <VBox
+            class="sapUiMediumMargin"
+            alignItems="Center">
+            <core:Icon
+               src="sap-icon://sys-enter-2"
+               size="5rem"
+               color="Positive"/>
+            <Title
+               class="sapUiSmallMarginTop"
+               text="{i18n>orderThankYou}"
+               level="H2"
+               titleStyle="H2"
+               wrapping="true"
+               textAlign="Center"/>
+            <Text
+               class="sapUiTinyMarginTop"
+               text="{i18n>orderNumberLabel} {order>/orderId}"/>
+            <Text text="{
+               path: 'order>/date',
+               formatter: 'Formatter.dateTime'
+            }"/>
+         </VBox>
+
+         <!-- items + totals -->
+         <Panel
+            class="sapUiResponsiveMargin"
+            width="auto"
+            headerText="{i18n>orderItemsTitle}">
+            <List
+               showSeparators="Inner"
+               items="{order>/items}">
+               <items>
+                  <StandardListItem
+                     icon="{
+                        path: 'order>image',
+                        formatter: 'Formatter.imageUrl'
+                     }"
+                     iconInset="false"
+                     title="{order>name}"
+                     description="{order>quantity} × {
+                        path: 'order>price',
+                        formatter: 'Formatter.price'
+                     }"
+                     info="{
+                        path: 'order>lineTotal',
+                        formatter: 'Formatter.price'
+                     }"/>
+               </items>
+            </List>
+            <VBox class="sapUiSmallMarginTop">
+               <HBox justifyContent="SpaceBetween">
+                  <Text text="{i18n>cartSubtotal}"/>
+                  <ObjectNumber number="{
+                     path: 'order>/subtotal',
+                     formatter: 'Formatter.price'
+                  }"/>
+               </HBox>
+               <HBox
+                  class="sapUiTinyMarginTop"
+                  justifyContent="SpaceBetween">
+                  <Text text="{i18n>cartTax}"/>
+                  <ObjectNumber number="{
+                     path: 'order>/tax',
+                     formatter: 'Formatter.price'
+                  }"/>
+               </HBox>
+               <HBox
+                  class="sapUiSmallMarginTop"
+                  justifyContent="SpaceBetween"
+                  alignItems="Center">
+                  <Title
+                     text="{i18n>cartGrandTotal}"
+                     level="H3"/>
+                  <ObjectNumber
+                     class="sapMObjectNumberLarge"
+                     number="{
+                        path: 'order>/total',
+                        formatter: 'Formatter.price'
+                     }"
+                     emphasized="true"/>
+               </HBox>
+            </VBox>
+         </Panel>
+
+         <!-- delivery + payment -->
+         <form:SimpleForm
+            class="sapUiResponsiveMargin"
+            width="auto"
+            title="{i18n>deliveryToTitle}"
+            editable="false"
+            layout="ResponsiveGridLayout"
+            labelSpanXL="3"
+            labelSpanL="3"
+            labelSpanM="3"
+            labelSpanS="12"
+            columnsXL="1"
+            columnsL="1"
+            columnsM="1">
+            <form:content>
+               <Label text="{i18n>fullNameLabel}"/>
+               <Text text="{order>/delivery/fullName}"/>
+               <Label text="{i18n>phoneLabel}"/>
+               <Text text="{order>/delivery/phone}"/>
+               <Label text="{i18n>addressLabel}"/>
+               <Text text="{order>/delivery/address}, {order>/delivery/city}, {order>/delivery/state} - {order>/delivery/pinCode}"/>
+               <Label text="{i18n>paymentMethodLabel}"/>
+               <Text text="{
+                  path: 'order>/paymentMethod',
+                  formatter: 'Formatter.paymentMethodText.bind($controller)'
+               }"/>
+            </form:content>
+         </form:SimpleForm>
+
+      </content>
+      <footer>
+         <OverflowToolbar>
+            <ToolbarSpacer/>
+            <Button
+               text="{i18n>continueShopping}"
+               type="Emphasized"
+               press=".onContinueShopping"/>
+         </OverflowToolbar>
+      </footer>
+   </Page>
+</mvc:View>

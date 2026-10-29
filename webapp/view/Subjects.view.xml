@@ -1,0 +1,25 @@
+<mvc:View
+	controllerName="ui5.shop.controller.Subjects"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page
+		title="Subjects"
+		showNavButton="true"
+		navButtonPress=".onNavBack">
+		<content>
+			<List
+				headerText="My Subjects"
+				footerText="Total credits: {subjects>/totalCredits}"
+				items="{subjects>/subjects}">
+				<items>
+					<StandardListItem
+						title="{subjects>name}"
+						description="{subjects>code}"
+						info="{subjects>credits} credits"
+						type="Active"
+						press=".onSubjectPress"/>
+				</items>
+			</List>
+		</content>
+	</Page>
+</mvc:View>

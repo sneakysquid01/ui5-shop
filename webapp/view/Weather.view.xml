@@ -1,0 +1,205 @@
+<mvc:View
+   controllerName="ui5.shop.controller.Weather"
+   xmlns="sap.m"
+   xmlns:core="sap.ui.core"
+   xmlns:mvc="sap.ui.core.mvc"
+   xmlns:f="sap.f"
+   xmlns:card="sap.f.cards">
+   <Page
+      id="weatherPage"
+      title="{i18n>weatherPageTitle}"
+      showNavButton="true"
+      navButtonPress=".onNavBack"
+      core:require="{
+         Formatter: 'ui5/shop/model/formatter'
+      }">
+      <content>
+         <VBox class="sapUiResponsiveMargin">
+
+            <!-- SEARCH: Indian cities, suggestions while typing -->
+            <Label
+               text="{i18n>weatherSearchLabel}"
+               labelFor="citySearch"/>
+            <Input
+               id="citySearch"
+               width="100%"
+               placeholder="{i18n>weatherSearchPlaceholder}"
+               value="{weatherView>/query}"
+               showSuggestion="true"
+               filterSuggests="false"
+               startSuggestion="2"
+               suggestionItems="{weatherView>/suggestions}"
+               liveChange=".onCityLiveChange"
+               suggestionItemSelected=".onCitySuggestionSelected"
+               submit=".onCitySubmit">
+               <suggestionItems>
+                  <core:ListItem
+                     text="{weatherView>name}"
+                     additionalText="{weatherView>state}"/>
+               </suggestionItems>
+            </Input>
+
+            <!-- RECENT SEARCHES -->
+            <HBox
+               class="sapUiSmallMarginTop"
+               alignItems="Center"
+               wrap="Wrap"
+               visible="{= ${weatherView>/recent}.length > 0 }">
+               <Text
+                  class="sapUiTinyMarginEnd"
+                  text="{i18n>weatherRecent}"/>
+               <HBox
+                  wrap="Wrap"
+                  items="{weatherView>/recent}">
+                  <items>
+                     <Button
+                        class="sapUiTinyMarginEnd sapUiTinyMarginBottom"
+                        text="{weatherView>name}"
+                        tooltip="{weatherView>label}"
+                        press=".onRecentPress"/>
+                  </items>
+               </HBox>
+            </HBox>
+
+            <!-- ERROR MESSAGE (with retry) -->
+            <MessageStrip
+               class="sapUiSmallMarginTop"
+               type="Error"
+               showIcon="true"
+               text="{weatherView>/errorText}"
+               visible="{= !!${weatherView>/errorText} }">
+               <link>
+                  <Link
+                     text="{i18n>weatherRetry}"
+                     visible="{= !!${weatherView>/selectedCity} }"
+                     press=".onRetry"/>
+               </link>
+            </MessageStrip>
+
+            <!-- START STATE (nothing searched yet) -->
+            <MessageStrip
+               class="sapUiSmallMarginTop"
+               type="Information"
+               showIcon="true"
+               text="{i18n>weatherStartHint}"
+               visible="{= !${weatherView>/forecast} &amp;&amp; !${weatherView>/errorText} &amp;&amp; !${weatherView>/busy} }"/>
+
+            <!-- RESULTS (busy while loading) -->
+            <VBox
+               class="sapUiSmallMarginTop"
+               busy="{weatherView>/busy}"
+               busyIndicatorDelay="0">
+
+               <!-- CURRENT WEATHER CARD -->
+               <f:Card visible="{= !!${weatherView>/forecast} }">
+                  <f:header>
+                     <card:Header
+                        title="{weatherView>/selectedCity/label}"
+                        subtitle="{i18n>weatherNow}"/>
+                  </f:header>
+                  <f:content>
+                     <VBox class="sapUiSmallMargin">
+                        <HBox alignItems="Center">
+                           <Text
+                              class="weatherEmoji sapUiSmallMarginEnd"
+                              text="{weatherView>/forecast/current/emoji}"/>
+                           <VBox>
+                              <Text
+                                 class="weatherTemperature"
+                                 text="{weatherView>/forecast/current/temperature}°C"/>
+                              <Text text="{
+                                 path: 'weatherView>/forecast/current/textKey',
+                                 formatter: 'Formatter.weatherText.bind($controller)'
+                              }"/>
+                           </VBox>
+                        </HBox>
+                        <Text
+                           class="sapUiSmallMarginTop"
+                           text="{weatherView>/forecast/current/summary}"/>
+                        <FlexBox
+                           class="sapUiSmallMarginTop"
+                           wrap="Wrap">
+                           <ObjectStatus
+                              class="sapUiMediumMarginEnd"
+                              title="{i18n>weatherFeelsLike}"
+                              text="{weatherView>/forecast/current/feelsLike}°C"/>
+                           <ObjectStatus
+                              class="sapUiMediumMarginEnd"
+                              title="{i18n>weatherHumidity}"
+                              text="{weatherView>/forecast/current/humidity}%"/>
+                           <ObjectStatus
+                              title="{i18n>weatherWind}"
+                              text="{weatherView>/forecast/current/windSpeed} km/h"/>
+                        </FlexBox>
+                     </VBox>
+                  </f:content>
+               </f:Card>
+
+               <!-- 7-DAY FORECAST -->
+               <List
+                  class="sapUiSmallMarginTop"
+                  headerText="{i18n>weatherNext7Days}"
+                  showSeparators="Inner"
+                  visible="{= !!${weatherView>/forecast} }"
+                  items="{weatherView>/forecast/daily}">
+                  <items>
+                     <CustomListItem>
+                        <HBox
+                           class="sapUiSmallMargin"
+                           justifyContent="SpaceBetween"
+                           alignItems="Center">
+                           <HBox alignItems="Center">
+                              <Text
+                                 class="weatherDayEmoji sapUiSmallMarginEnd"
+                                 text="{weatherView>emoji}"/>
+                              <VBox>
+                                 <Title
+                                    level="H5"
+                                    text="{
+                                       path: 'weatherView>date',
+                                       formatter: 'Formatter.dayLabel.bind($controller)'
+                                    }"/>
+                                 <Text text="{
+                                    path: 'weatherView>textKey',
+                                    formatter: 'Formatter.weatherText.bind($controller)'
+                                 }"/>
+                              </VBox>
+                           </HBox>
+                           <VBox alignItems="End">
+                              <Text text="{weatherView>high}° / {weatherView>low}°"/>
+                              <Text
+                                 text="💧 {weatherView>rainChance}%"
+                                 visible="{= ${weatherView>rainChance} > 0 }"/>
+                           </VBox>
+                        </HBox>
+                     </CustomListItem>
+                  </items>
+               </List>
+            </VBox>
+
+            <!-- ATTRIBUTION (required by the APIs' terms) -->
+            <HBox
+               class="sapUiMediumMarginTop"
+               wrap="Wrap"
+               alignItems="Center">
+               <Text
+                  class="sapUiTinyMarginEnd"
+                  text="{i18n>weatherDataBy}"/>
+               <Link
+                  class="sapUiTinyMarginEnd"
+                  text="Pirate Weather"
+                  href="https://pirateweather.net"
+                  target="_blank"/>
+               <Text
+                  class="sapUiTinyMarginEnd"
+                  text="·  {i18n>weatherCitiesBy}"/>
+               <Link
+                  text="Open-Meteo.com"
+                  href="https://open-meteo.com"
+                  target="_blank"/>
+            </HBox>
+
+         </VBox>
+      </content>
+   </Page>
+</mvc:View>

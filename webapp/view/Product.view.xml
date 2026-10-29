@@ -1,0 +1,353 @@
+<mvc:View
+   controllerName="ui5.shop.controller.Product"
+   xmlns="sap.m"
+   xmlns:core="sap.ui.core"
+   xmlns:mvc="sap.ui.core.mvc"
+   xmlns:uxap="sap.uxap">
+   <Page
+      id="productPage"
+      title="{product>name}"
+      showNavButton="true"
+      navButtonPress=".onNavBack"
+      enableScrolling="false">
+      <headerContent>
+         <core:Fragment
+            fragmentName="ui5.shop.view.fragments.CartButton"
+            type="XML"/>
+      </headerContent>
+      <content>
+         <uxap:ObjectPageLayout
+            id="objectPage"
+            upperCaseAnchorBar="false"
+            core:require="{
+               Formatter: 'ui5/shop/model/formatter'
+            }">
+
+            <!-- HEADER TITLE: name + brand/category -->
+            <uxap:headerTitle>
+               <uxap:ObjectPageDynamicHeaderTitle>
+                  <uxap:heading>
+                     <Title
+                        text="{product>name}"
+                        wrapping="true"/>
+                  </uxap:heading>
+                  <uxap:expandedContent>
+                     <Text text="{product>brand} · {product>category}"/>
+                  </uxap:expandedContent>
+                  <uxap:snappedContent>
+                     <Text text="{product>brand} · {product>category}"/>
+                  </uxap:snappedContent>
+               </uxap:ObjectPageDynamicHeaderTitle>
+            </uxap:headerTitle>
+
+            <!-- HEADER CONTENT: price, rating, availability (collapses on scroll) -->
+            <uxap:headerContent>
+               <FlexBox
+                  wrap="Wrap"
+                  alignItems="Start">
+                  <VBox class="sapUiMediumMarginEnd sapUiSmallMarginBottom">
+                     <Label text="{i18n>priceLabel}"/>
+                     <ObjectNumber
+                        class="sapMObjectNumberLarge"
+                        number="{
+                           path: 'product>price',
+                           formatter: 'Formatter.price'
+                        }"
+                        emphasized="true"/>
+                  </VBox>
+                  <VBox class="sapUiMediumMarginEnd sapUiSmallMarginBottom">
+                     <Label text="{i18n>ratingLabel}"/>
+                     <HBox alignItems="Center">
+                        <RatingIndicator
+                           value="{product>rating}"
+                           maxValue="5"
+                           iconSize="1rem"
+                           displayOnly="true"/>
+                        <Text
+                           class="sapUiTinyMarginBegin"
+                           text="{product>reviewCount} {i18n>reviewsLabel}"/>
+                     </HBox>
+                  </VBox>
+                  <VBox class="sapUiSmallMarginBottom">
+                     <Label text="{i18n>availabilityLabel}"/>
+                     <ObjectStatus
+                        class="sapMObjectStatusLarge"
+                        text="{
+                           path: 'product>stock',
+                           formatter: 'Formatter.stockText.bind($controller)'
+                        }"
+                        state="{
+                           path: 'product>stock',
+                           formatter: 'Formatter.stockState'
+                        }"/>
+                  </VBox>
+               </FlexBox>
+            </uxap:headerContent>
+
+            <!-- SECTIONS (shown as tabs in the anchor bar) -->
+            <uxap:sections>
+
+               <!-- Images -->
+               <uxap:ObjectPageSection
+                  id="imagesSection"
+                  title="{i18n>imagesSectionTitle}"
+                  titleUppercase="false">
+                  <uxap:subSections>
+                     <uxap:ObjectPageSubSection>
+                        <uxap:blocks>
+                           <Carousel
+                              id="productCarousel"
+                              class="productCarousel"
+                              height="400px"
+                              loop="true"
+                              pages="{
+                                 path: 'product>images',
+                                 templateShareable: false
+                              }">
+                              <pages>
+                                 <Image
+                                    src="{
+                                       path: 'product>',
+                                       formatter: 'Formatter.imageUrl'
+                                    }"
+                                    alt="{product>name}"
+                                    width="100%"
+                                    height="100%"
+                                    mode="Background"
+                                    backgroundSize="contain"
+                                    backgroundPosition="center"/>
+                              </pages>
+                           </Carousel>
+                        </uxap:blocks>
+                     </uxap:ObjectPageSubSection>
+                  </uxap:subSections>
+               </uxap:ObjectPageSection>
+
+               <!-- Description -->
+               <uxap:ObjectPageSection
+                  title="{i18n>descriptionSectionTitle}"
+                  titleUppercase="false">
+                  <uxap:subSections>
+                     <uxap:ObjectPageSubSection>
+                        <uxap:blocks>
+                           <Text text="{product>description}"/>
+                        </uxap:blocks>
+                     </uxap:ObjectPageSubSection>
+                  </uxap:subSections>
+               </uxap:ObjectPageSection>
+
+               <!-- Specifications -->
+               <uxap:ObjectPageSection
+                  title="{i18n>specificationsSectionTitle}"
+                  titleUppercase="false">
+                  <uxap:subSections>
+                     <uxap:ObjectPageSubSection>
+                        <uxap:blocks>
+                           <List
+                              showSeparators="Inner"
+                              items="{
+                                 path: 'product>specifications',
+                                 templateShareable: false
+                              }">
+                              <items>
+                                 <DisplayListItem
+                                    label="{product>name}"
+                                    value="{product>value}"/>
+                              </items>
+                           </List>
+                        </uxap:blocks>
+                     </uxap:ObjectPageSubSection>
+                  </uxap:subSections>
+               </uxap:ObjectPageSection>
+
+               <!-- Reviews -->
+               <uxap:ObjectPageSection
+                  id="reviewsSection"
+                  title="{i18n>reviewsSectionTitle}"
+                  titleUppercase="false">
+                  <uxap:subSections>
+                     <uxap:ObjectPageSubSection>
+                        <uxap:blocks>
+                           <VBox width="100%">
+
+                              <!-- summary: overall rating, star bars, write button -->
+                              <FlexBox
+                                 wrap="Wrap"
+                                 alignItems="Start"
+                                 justifyContent="SpaceBetween">
+                                 <HBox
+                                    class="sapUiSmallMarginBottom"
+                                    alignItems="Center"
+                                    wrap="Wrap">
+                                    <VBox
+                                       class="sapUiMediumMarginEnd sapUiSmallMarginBottom"
+                                       alignItems="Center">
+                                       <Title
+                                          text="{product>rating}"
+                                          titleStyle="H1"/>
+                                       <RatingIndicator
+                                          value="{product>rating}"
+                                          maxValue="5"
+                                          iconSize="1.25rem"
+                                          displayOnly="true"/>
+                                       <Text text="{product>reviewCount} {i18n>reviewsLabel}"/>
+                                    </VBox>
+                                    <VBox items="{reviewView>/breakdown}">
+                                       <items>
+                                          <HBox alignItems="Center">
+                                             <Text
+                                                width="2.5rem"
+                                                text="{reviewView>stars} ★"/>
+                                             <ProgressIndicator
+                                                class="sapUiTinyMarginBeginEnd"
+                                                width="10rem"
+                                                height="0.75rem"
+                                                percentValue="{reviewView>percent}"
+                                                showValue="false"
+                                                state="Information"/>
+                                             <Text text="{reviewView>count}"/>
+                                          </HBox>
+                                       </items>
+                                    </VBox>
+                                 </HBox>
+                                 <Button
+                                    text="{i18n>writeReview}"
+                                    icon="sap-icon://edit"
+                                    type="Emphasized"
+                                    press=".onOpenReviewDialog"/>
+                              </FlexBox>
+                              <Text
+                                 class="sapUiSmallMarginBottom"
+                                 text="{reviewView>/breakdownText}"/>
+
+                              <!-- list title + sort -->
+                              <Toolbar style="Clear">
+                                 <Title
+                                    text="{reviewView>/listTitle}"
+                                    level="H3"/>
+                                 <ToolbarSpacer/>
+                                 <Select
+                                    selectedKey="{reviewView>/sortKey}"
+                                    change=".onReviewSortChange">
+                                    <core:Item key="newest" text="{i18n>reviewSortNewest}"/>
+                                    <core:Item key="highest" text="{i18n>reviewSortHighest}"/>
+                                    <core:Item key="lowest" text="{i18n>reviewSortLowest}"/>
+                                 </Select>
+                              </Toolbar>
+
+                              <!-- the reviews of this product -->
+                              <List
+                                 id="reviewList"
+                                 showSeparators="Inner"
+                                 noDataText="{i18n>noReviews}"
+                                 items="{
+                                    path: 'review>/Reviews',
+                                    sorter: { path: 'date', descending: true },
+                                    templateShareable: false
+                                 }">
+                                 <items>
+                                    <CustomListItem>
+                                       <HBox
+                                          class="sapUiSmallMargin"
+                                          alignItems="Start">
+                                          <Avatar
+                                             class="sapUiSmallMarginEnd"
+                                             displaySize="S"
+                                             initials="{
+                                                path: 'review>author',
+                                                formatter: 'Formatter.initials'
+                                             }"/>
+                                          <VBox width="100%">
+                                             <HBox
+                                                width="100%"
+                                                justifyContent="SpaceBetween"
+                                                alignItems="Center">
+                                                <HBox alignItems="Center">
+                                                   <Title
+                                                      text="{review>author}"
+                                                      level="H5"/>
+                                                   <ObjectStatus
+                                                      class="sapUiTinyMarginBegin"
+                                                      text="{i18n>yourReview}"
+                                                      state="Information"
+                                                      inverted="true"
+                                                      visible="{= !!${review>isOwn} }"/>
+                                                </HBox>
+                                                <Button
+                                                   icon="sap-icon://delete"
+                                                   type="Transparent"
+                                                   tooltip="{i18n>deleteReview}"
+                                                   visible="{= !!${review>isOwn} }"
+                                                   press=".onDeleteReview"/>
+                                             </HBox>
+                                             <HBox alignItems="Center">
+                                                <RatingIndicator
+                                                   value="{review>rating}"
+                                                   maxValue="5"
+                                                   iconSize="0.875rem"
+                                                   displayOnly="true"/>
+                                                <Text
+                                                   class="sapUiSmallMarginBegin"
+                                                   text="{
+                                                      path: 'review>date',
+                                                      formatter: 'Formatter.date'
+                                                   }"/>
+                                             </HBox>
+                                             <Text
+                                                class="sapUiTinyMarginTop"
+                                                text="{review>comment}"/>
+                                          </VBox>
+                                       </HBox>
+                                    </CustomListItem>
+                                 </items>
+                              </List>
+                           </VBox>
+                        </uxap:blocks>
+                     </uxap:ObjectPageSubSection>
+                  </uxap:subSections>
+               </uxap:ObjectPageSection>
+
+            </uxap:sections>
+         </uxap:ObjectPageLayout>
+      </content>
+
+      <!-- FOOTER: price, quantity, add to cart, buy now -->
+      <footer>
+         <OverflowToolbar core:require="{
+               Formatter: 'ui5/shop/model/formatter'
+            }">
+            <ObjectNumber
+               number="{
+                  path: 'product>price',
+                  formatter: 'Formatter.price'
+               }"
+               emphasized="true"/>
+            <ToolbarSpacer/>
+            <StepInput
+               width="8rem"
+               value="{productView>/quantity}"
+               min="1"
+               max="{= Math.max(${product>stock}, 1) }"
+               enabled="{= ${product>stock} > 0 }">
+               <layoutData>
+                  <OverflowToolbarLayoutData priority="NeverOverflow"/>
+               </layoutData>
+            </StepInput>
+            <Button
+               text="{i18n>addToCart}"
+               icon="sap-icon://cart"
+               enabled="{= ${product>stock} > 0 }"
+               press=".onAddToCart"/>
+            <Button
+               text="{i18n>buyNow}"
+               type="Emphasized"
+               enabled="{= ${product>stock} > 0 }"
+               press=".onBuyNow">
+               <layoutData>
+                  <OverflowToolbarLayoutData priority="NeverOverflow"/>
+               </layoutData>
+            </Button>
+         </OverflowToolbar>
+      </footer>
+   </Page>
+</mvc:View>

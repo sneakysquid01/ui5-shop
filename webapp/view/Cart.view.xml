@@ -1,0 +1,204 @@
+<mvc:View
+   controllerName="ui5.shop.controller.Cart"
+   xmlns="sap.m"
+   xmlns:core="sap.ui.core"
+   xmlns:mvc="sap.ui.core.mvc">
+   <Page
+      id="cartPage"
+      title="{i18n>cartPageTitle}"
+      showNavButton="true"
+      navButtonPress=".onNavBack">
+      <headerContent>
+         <Button
+            text="{i18n>cartClear}"
+            icon="sap-icon://delete"
+            type="Transparent"
+            visible="{= ${cart>/itemCount} > 0 }"
+            press=".onClearCart"/>
+      </headerContent>
+      <content>
+
+         <!-- EMPTY STATE -->
+         <IllustratedMessage
+            visible="{= ${cart>/itemCount} === 0 }"
+            illustrationType="sapIllus-EmptyList"
+            title="{i18n>cartEmptyTitle}"
+            description="{i18n>cartEmptyText}">
+            <additionalContent>
+               <Button
+                  text="{i18n>startShopping}"
+                  type="Emphasized"
+                  press=".onContinueShopping"/>
+            </additionalContent>
+         </IllustratedMessage>
+
+         <!-- CART ITEMS -->
+         <Table
+            id="cartTable"
+            class="sapUiResponsiveMargin"
+            width="auto"
+            visible="{= ${cart>/itemCount} > 0 }"
+            items="{cart>/items}">
+            <headerToolbar>
+               <Toolbar>
+                  <Title
+                     text="{i18n>cartItemsTitle} ({cart>/itemCount})"
+                     level="H2"/>
+               </Toolbar>
+            </headerToolbar>
+            <columns>
+               <Column>
+                  <Text text="{i18n>cartColumnProduct}"/>
+               </Column>
+               <Column
+                  minScreenWidth="Tablet"
+                  demandPopin="true"
+                  hAlign="End">
+                  <Text text="{i18n>cartColumnPrice}"/>
+               </Column>
+               <Column
+                  hAlign="Center"
+                  width="9rem">
+                  <Text text="{i18n>cartColumnQuantity}"/>
+               </Column>
+               <Column
+                  minScreenWidth="Small"
+                  demandPopin="true"
+                  hAlign="End">
+                  <Text text="{i18n>cartColumnTotal}"/>
+               </Column>
+               <Column
+                  hAlign="End"
+                  width="3rem"/>
+            </columns>
+            <items>
+               <ColumnListItem
+                  vAlign="Middle"
+                  core:require="{
+                     Formatter: 'ui5/shop/model/formatter'
+                  }">
+                  <cells>
+                     <!-- product: image + name (opens product page) -->
+                     <HBox alignItems="Center">
+                        <Avatar
+                           src="{
+                              path: 'cart>image',
+                              formatter: 'Formatter.imageUrl'
+                           }"
+                           displayShape="Square"
+                           displaySize="S"/>
+                        <Link
+                           class="sapUiSmallMarginBegin"
+                           text="{cart>name}"
+                           press=".onProductPress"/>
+                     </HBox>
+                     <!-- unit price -->
+                     <ObjectNumber
+                        number="{
+                           path: 'cart>price',
+                           formatter: 'Formatter.price'
+                        }"/>
+                     <!-- quantity -->
+                     <StepInput
+                        width="8rem"
+                        value="{cart>quantity}"
+                        min="1"
+                        max="{cart>stock}"
+                        change=".onQuantityChange"/>
+                     <!-- line total -->
+                     <ObjectNumber
+                        number="{
+                           path: 'cart>lineTotal',
+                           formatter: 'Formatter.price'
+                        }"
+                        emphasized="true"/>
+                     <!-- remove -->
+                     <Button
+                        icon="sap-icon://decline"
+                        type="Transparent"
+                        tooltip="{i18n>cartRemoveItem}"
+                        press=".onRemoveItem"/>
+                  </cells>
+               </ColumnListItem>
+            </items>
+         </Table>
+
+         <!-- ORDER SUMMARY -->
+         <Panel
+            class="sapUiResponsiveMargin"
+            width="auto"
+            headerText="{i18n>cartSummaryTitle}"
+            visible="{= ${cart>/itemCount} > 0 }">
+            <VBox core:require="{
+                  Formatter: 'ui5/shop/model/formatter'
+               }">
+               <HBox justifyContent="SpaceBetween" alignItems="Center">
+                  <Text text="{i18n>cartSubtotal}"/>
+                  <ObjectNumber number="{
+                     path: 'cart>/subtotal',
+                     formatter: 'Formatter.price'
+                  }"/>
+               </HBox>
+               <HBox
+                  class="sapUiTinyMarginTop"
+                  justifyContent="SpaceBetween"
+                  alignItems="Center">
+                  <Text text="{i18n>cartTax}"/>
+                  <ObjectNumber number="{
+                     path: 'cart>/tax',
+                     formatter: 'Formatter.price'
+                  }"/>
+               </HBox>
+               <HBox
+                  class="sapUiSmallMarginTop"
+                  justifyContent="SpaceBetween"
+                  alignItems="Center">
+                  <Title
+                     text="{i18n>cartGrandTotal}"
+                     level="H3"/>
+                  <ObjectNumber
+                     class="sapMObjectNumberLarge"
+                     number="{
+                        path: 'cart>/total',
+                        formatter: 'Formatter.price'
+                     }"
+                     emphasized="true"/>
+               </HBox>
+            </VBox>
+         </Panel>
+
+      </content>
+
+      <!-- FOOTER -->
+      <footer>
+         <OverflowToolbar core:require="{
+               Formatter: 'ui5/shop/model/formatter'
+            }">
+            <Text
+               text="{i18n>cartTotal}"
+               visible="{= ${cart>/itemCount} > 0 }"/>
+            <Title
+               text="{
+                  path: 'cart>/total',
+                  formatter: 'Formatter.price'
+               }"
+               visible="{= ${cart>/itemCount} > 0 }"/>
+            <ToolbarSpacer/>
+            <Button
+               text="{i18n>continueShopping}"
+               press=".onContinueShopping"/>
+            <Button
+               text="{i18n>proceedToCheckout}"
+               icon="sap-icon://navigation-right-arrow"
+               iconFirst="false"
+               type="Emphasized"
+               enabled="{= ${cart>/itemCount} > 0 }"
+               press=".onCheckout">
+               <layoutData>
+                  <OverflowToolbarLayoutData priority="NeverOverflow"/>
+               </layoutData>
+            </Button>
+         </OverflowToolbar>
+      </footer>
+   </Page>
+</mvc:View>

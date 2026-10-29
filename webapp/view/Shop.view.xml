@@ -1,0 +1,203 @@
+<mvc:View
+   controllerName="ui5.shop.controller.Shop"
+   xmlns="sap.m"
+   xmlns:core="sap.ui.core"
+   xmlns:mvc="sap.ui.core.mvc"
+   xmlns:f="sap.f"
+   xmlns:grid="sap.ui.layout.cssgrid">
+   <Page
+      id="shopPage"
+      title="{i18n>shopPageTitle}">
+            <headerContent>
+         <Button
+            text="Subjects"
+            type="Transparent"
+            press=".onSubjectsPress"/>
+         <Button
+            text="☁️"
+            type="Transparent"
+            tooltip="{i18n>weatherButtonTooltip}"
+            press=".onWeatherPress"/>
+         <core:Fragment
+            fragmentName="ui5.shop.view.fragments.CartButton"
+            type="XML"/>
+      </headerContent>
+      <content>
+         <f:GridList
+            id="productGrid"
+            class="sapUiResponsiveContentPadding"
+            noDataText="{i18n>noProducts}"
+            updateFinished=".onUpdateFinished"
+            items="{product>/Products}">
+
+            <!-- TOOLBAR: title with count, search, category, sort, clear -->
+            <f:headerToolbar>
+               <OverflowToolbar>
+                  <Title
+                     text="{shopView>/title}"
+                     level="H2"/>
+                  <ToolbarSpacer/>
+                  <SearchField
+                     id="productSearch"
+                     width="16rem"
+                     value="{shopView>/searchQuery}"
+                     placeholder="{i18n>searchPlaceholder}"
+                     liveChange=".onSearch"
+                     search=".onSearch">
+                     <layoutData>
+                        <OverflowToolbarLayoutData
+                           priority="NeverOverflow"
+                           shrinkable="true"
+                           minWidth="10rem"/>
+                     </layoutData>
+                  </SearchField>
+                  <Select
+                     id="categorySelect"
+                     autoAdjustWidth="true"
+                     tooltip="{i18n>categoryLabel}"
+                     selectedKey="{shopView>/category}"
+                     items="{shopView>/categories}"
+                     change=".onFilterChange">
+                     <core:Item
+                        key="{shopView>key}"
+                        text="{shopView>text}"/>
+                  </Select>
+                  <Select
+                     id="sortSelect"
+                     autoAdjustWidth="true"
+                     tooltip="{i18n>sortLabel}"
+                     selectedKey="{shopView>/sortKey}"
+                     change=".onFilterChange">
+                     <core:Item key="featured" text="{i18n>sortFeatured}"/>
+                     <core:Item key="priceAsc" text="{i18n>sortPriceAsc}"/>
+                     <core:Item key="priceDesc" text="{i18n>sortPriceDesc}"/>
+                     <core:Item key="rating" text="{i18n>sortRating}"/>
+                     <core:Item key="name" text="{i18n>sortName}"/>
+                  </Select>
+                  <Button
+                     icon="sap-icon://clear-filter"
+                     type="Transparent"
+                     tooltip="{i18n>clearFilters}"
+                     visible="{shopView>/filtersActive}"
+                     press=".onClearFilters"/>
+               </OverflowToolbar>
+            </f:headerToolbar>
+
+            <!-- INFO BAR: shows active filters, tap to clear -->
+            <f:infoToolbar>
+               <OverflowToolbar
+                  design="Info"
+                  active="true"
+                  visible="{shopView>/filtersActive}"
+                  press=".onClearFilters">
+                  <Text text="{shopView>/filterInfo}"/>
+                  <ToolbarSpacer/>
+                  <core:Icon
+                     src="sap-icon://decline"
+                     tooltip="{i18n>clearFilters}"/>
+               </OverflowToolbar>
+            </f:infoToolbar>
+
+            <f:customLayout>
+               <grid:GridBoxLayout boxesPerRowConfig="XL4 L4 M3 S1"/>
+            </f:customLayout>
+
+            <f:items>
+               <CustomListItem
+                  type="Inactive"
+                  core:require="{
+                     Formatter: 'ui5/shop/model/formatter'
+                  }">
+                  <VBox class="sapUiSmallMargin">
+
+                     <!-- ZONE 1: clickable header (opens product details) -->
+                     <HBox
+                        justifyContent="SpaceBetween"
+                        alignItems="Center">
+                        <ObjectIdentifier
+                           title="{product>name}"
+                           text="{product>category} · ★ {product>rating}"
+                           titleActive="true"
+                           titlePress=".onProductPress"/>
+                        <Button
+                           icon="sap-icon://navigation-right-arrow"
+                           type="Transparent"
+                           tooltip="{i18n>viewDetails}"
+                           press=".onProductPress"/>
+                     </HBox>
+
+                     <!-- ZONE 2: image slider (only changes images) -->
+                     <Carousel
+                        class="sapUiSmallMarginTopBottom productCarousel"
+                        height="220px"
+                        loop="true"
+                        pages="{
+                           path: 'product>images',
+                           templateShareable: false
+                        }">
+                        <pages>
+                           <Image
+                              src="{
+                                 path: 'product>',
+                                 formatter: 'Formatter.imageUrl'
+                              }"
+                              alt="{product>name}"
+                              width="100%"
+                              height="100%"
+                              mode="Background"
+                              backgroundSize="contain"
+                              backgroundPosition="center"/>
+                        </pages>
+                     </Carousel>
+
+                     <!-- ZONE 3: short details -->
+                     <Text
+                        text="{product>shortDescription}"
+                        maxLines="2"/>
+                     <HBox
+                        class="sapUiTinyMarginTop"
+                        justifyContent="SpaceBetween"
+                        alignItems="Center">
+                        <ObjectNumber
+                           number="{
+                              path: 'product>price',
+                              formatter: 'Formatter.price'
+                           }"
+                           emphasized="true"/>
+                        <ObjectStatus
+                           text="{
+                              path: 'product>stock',
+                              formatter: 'Formatter.stockText.bind($controller)'
+                           }"
+                           state="{
+                              path: 'product>stock',
+                              formatter: 'Formatter.stockState'
+                           }"/>
+                     </HBox>
+
+                     <!-- ZONE 4: actions (never opens details) -->
+                     <HBox
+                        class="sapUiSmallMarginTop"
+                        justifyContent="SpaceBetween"
+                        alignItems="Center">
+                        <StepInput
+                           width="8rem"
+                           value="{product>selectedQuantity}"
+                           min="1"
+                           max="{= Math.max(${product>stock}, 1) }"
+                           enabled="{= ${product>stock} > 0 }"/>
+                        <Button
+                           text="{i18n>addToCart}"
+                           icon="sap-icon://cart"
+                           type="Emphasized"
+                           enabled="{= ${product>stock} > 0 }"
+                           press=".onAddToCart"/>
+                     </HBox>
+
+                  </VBox>
+               </CustomListItem>
+            </f:items>
+         </f:GridList>
+      </content>
+   </Page>
+</mvc:View>

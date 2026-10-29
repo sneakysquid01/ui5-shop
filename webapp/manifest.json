@@ -1,0 +1,162 @@
+{
+  "_version": "2.8.0",
+  "sap.app": {
+    "id": "ui5.shop",
+    "type": "application",
+    "i18n": {
+      "bundleName": "ui5.shop.i18n.i18n",
+      "supportedLocales": [""],
+      "fallbackLocale": ""
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "applicationVersion": {
+      "version": "1.0.0"
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "dependencies": {
+      "minUI5Version": "1.148",
+      "libs": {
+        "sap.ui.core": {},
+        "sap.m": {},
+        "sap.f": {},
+        "sap.ui.layout": {},
+        "sap.uxap": {}
+      }
+    },
+    "rootView": {
+      "viewName": "ui5.shop.view.App",
+      "type": "XML",
+      "id": "app"
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "ui5.shop.i18n.i18n",
+          "supportedLocales": [""],
+          "fallbackLocale": ""
+        }
+      },
+      "product": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "model/products.json"
+      },
+      "review": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "model/reviews.json"
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "type": "View",
+        "viewType": "XML",
+        "path": "ui5.shop.view",
+        "controlId": "app",
+        "controlAggregation": "pages",
+        "bypassed": {
+          "target": "notFound"
+        }
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "shop",
+          "target": "shop"
+        },
+        {
+          "pattern": "product/{productId}",
+          "name": "product",
+          "target": "product"
+        },
+        {
+          "pattern": "cart",
+          "name": "cart",
+          "target": "cart"
+        },
+        {
+          "pattern": "checkout",
+          "name": "checkout",
+          "target": "checkout"
+        },
+        {
+          "pattern": "order/{orderId}",
+          "name": "orderConfirmation",
+          "target": "orderConfirmation"
+        },
+        {
+          "pattern": "weather",
+          "name": "weather",
+          "target": "weather"
+        },
+                {
+          "pattern": "subjects",
+          "name": "subjects",
+          "target": "subjects"
+        }
+      ],
+      "targets": {
+        "shop": {
+          "id": "shop",
+          "name": "Shop",
+          "level": 1
+        },
+        "product": {
+          "id": "product",
+          "name": "Product",
+          "level": 2
+        },
+        "cart": {
+          "id": "cart",
+          "name": "Cart",
+          "level": 3
+        },
+        "checkout": {
+          "id": "checkout",
+          "name": "Checkout",
+          "level": 4
+        },
+        "orderConfirmation": {
+          "id": "orderConfirmation",
+          "name": "OrderConfirmation",
+          "level": 5
+        },
+        "weather": {
+          "id": "weather",
+          "name": "Weather",
+          "level": 2
+        },
+                "subjects": {
+          "id": "subjects",
+          "name": "Subjects",
+          "level": 2
+        },
+        "notFound": {
+          "id": "notFound",
+          "name": "NotFound"
+        }
+      }
+    }
+  }
+}

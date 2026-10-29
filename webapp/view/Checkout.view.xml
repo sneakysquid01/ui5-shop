@@ -1,0 +1,251 @@
+<mvc:View
+   controllerName="ui5.shop.controller.Checkout"
+   xmlns="sap.m"
+   xmlns:core="sap.ui.core"
+   xmlns:mvc="sap.ui.core.mvc"
+   xmlns:form="sap.ui.layout.form">
+   <Page
+      id="checkoutPage"
+      title="{i18n>checkoutPageTitle}"
+      showNavButton="true"
+      navButtonPress=".onNavBack"
+      enableScrolling="false"
+      core:require="{
+         Formatter: 'ui5/shop/model/formatter'
+      }">
+      <content>
+         <Wizard
+            id="checkoutWizard"
+            class="sapUiResponsivePadding--header sapUiResponsivePadding--content"
+            finishButtonText="{i18n>placeOrder}"
+            complete=".onPlaceOrder">
+            <steps>
+
+               <!-- STEP 1: REVIEW ITEMS -->
+               <WizardStep
+                  id="reviewStep"
+                  title="{i18n>stepReview}"
+                  icon="sap-icon://cart"
+                  validated="true">
+                  <List
+                     showSeparators="Inner"
+                     items="{cart>/items}">
+                     <items>
+                        <StandardListItem
+                           icon="{
+                              path: 'cart>image',
+                              formatter: 'Formatter.imageUrl'
+                           }"
+                           iconInset="false"
+                           title="{cart>name}"
+                           description="{cart>quantity} × {
+                              path: 'cart>price',
+                              formatter: 'Formatter.price'
+                           }"
+                           info="{
+                              path: 'cart>lineTotal',
+                              formatter: 'Formatter.price'
+                           }"/>
+                     </items>
+                  </List>
+                  <core:Fragment
+                     fragmentName="ui5.shop.view.fragments.OrderSummary"
+                     type="XML"/>
+               </WizardStep>
+
+               <!-- STEP 2: DELIVERY DETAILS (validated live) -->
+               <WizardStep
+                  id="deliveryStep"
+                  title="{i18n>stepDelivery}"
+                  icon="sap-icon://shipping-status"
+                  validated="false">
+                  <MessageStrip
+                     class="sapUiSmallMarginBottom"
+                     text="{i18n>deliveryHint}"
+                     type="Information"
+                     showIcon="true"/>
+                  <form:SimpleForm
+                     editable="true"
+                     layout="ResponsiveGridLayout"
+                     labelSpanXL="3"
+                     labelSpanL="3"
+                     labelSpanM="3"
+                     labelSpanS="12"
+                     columnsXL="1"
+                     columnsL="1"
+                     columnsM="1">
+                     <form:content>
+                        <Label
+                           text="{i18n>fullNameLabel}"
+                           required="true"
+                           labelFor="fullNameInput"/>
+                        <Input
+                           id="fullNameInput"
+                           value="{checkout>/delivery/fullName}"
+                           valueState="{checkout>/valueStates/fullName}"
+                           valueStateText="{i18n>fullNameError}"
+                           liveChange=".onDeliveryChange"/>
+
+                        <Label
+                           text="{i18n>phoneLabel}"
+                           required="true"
+                           labelFor="phoneInput"/>
+                        <Input
+                           id="phoneInput"
+                           type="Tel"
+                           maxLength="10"
+                           placeholder="{i18n>phonePlaceholder}"
+                           value="{checkout>/delivery/phone}"
+                           valueState="{checkout>/valueStates/phone}"
+                           valueStateText="{i18n>phoneError}"
+                           liveChange=".onDeliveryChange"/>
+
+                        <Label
+                           text="{i18n>emailLabel}"
+                           labelFor="emailInput"/>
+                        <Input
+                           id="emailInput"
+                           type="Email"
+                           value="{checkout>/delivery/email}"
+                           valueState="{checkout>/valueStates/email}"
+                           valueStateText="{i18n>emailError}"
+                           liveChange=".onDeliveryChange"/>
+
+                        <Label
+                           text="{i18n>addressLabel}"
+                           required="true"
+                           labelFor="addressInput"/>
+                        <TextArea
+                           id="addressInput"
+                           rows="2"
+                           growing="true"
+                           value="{checkout>/delivery/address}"
+                           valueState="{checkout>/valueStates/address}"
+                           valueStateText="{i18n>addressError}"
+                           liveChange=".onDeliveryChange"/>
+
+                        <Label
+                           text="{i18n>cityLabel}"
+                           required="true"
+                           labelFor="cityInput"/>
+                        <Input
+                           id="cityInput"
+                           value="{checkout>/delivery/city}"
+                           valueState="{checkout>/valueStates/city}"
+                           valueStateText="{i18n>cityError}"
+                           liveChange=".onDeliveryChange"/>
+
+                        <Label
+                           text="{i18n>stateLabel}"
+                           required="true"
+                           labelFor="stateInput"/>
+                        <Input
+                           id="stateInput"
+                           value="{checkout>/delivery/state}"
+                           valueState="{checkout>/valueStates/state}"
+                           valueStateText="{i18n>stateError}"
+                           liveChange=".onDeliveryChange"/>
+
+                        <Label
+                           text="{i18n>pinCodeLabel}"
+                           required="true"
+                           labelFor="pinCodeInput"/>
+                        <Input
+                           id="pinCodeInput"
+                           maxLength="6"
+                           placeholder="{i18n>pinCodePlaceholder}"
+                           value="{checkout>/delivery/pinCode}"
+                           valueState="{checkout>/valueStates/pinCode}"
+                           valueStateText="{i18n>pinCodeError}"
+                           liveChange=".onDeliveryChange"/>
+                     </form:content>
+                  </form:SimpleForm>
+               </WizardStep>
+
+               <!-- STEP 3: PAYMENT METHOD (simulated) -->
+               <WizardStep
+                  id="paymentStep"
+                  title="{i18n>stepPayment}"
+                  icon="sap-icon://credit-card"
+                  validated="true">
+                  <RadioButtonGroup
+                     id="paymentGroup"
+                     selectedIndex="{checkout>/paymentIndex}"
+                     select=".onPaymentSelect">
+                     <buttons>
+                        <RadioButton text="{i18n>paymentCod}"/>
+                        <RadioButton text="{i18n>paymentUpi}"/>
+                        <RadioButton text="{i18n>paymentCard}"/>
+                     </buttons>
+                  </RadioButtonGroup>
+                  <MessageStrip
+                     class="sapUiSmallMarginTop"
+                     text="{i18n>paymentCodInfo}"
+                     type="Information"
+                     showIcon="true"
+                     visible="{= ${checkout>/paymentMethod} === 'cod' }"/>
+                  <MessageStrip
+                     class="sapUiSmallMarginTop"
+                     text="{i18n>paymentUpiInfo}"
+                     type="Information"
+                     showIcon="true"
+                     visible="{= ${checkout>/paymentMethod} === 'upi' }"/>
+                  <MessageStrip
+                     class="sapUiSmallMarginTop"
+                     text="{i18n>paymentCardInfo}"
+                     type="Warning"
+                     showIcon="true"
+                     visible="{= ${checkout>/paymentMethod} === 'card' }"/>
+               </WizardStep>
+
+               <!-- STEP 4: CONFIRM -->
+               <WizardStep
+                  id="confirmStep"
+                  title="{i18n>stepConfirm}"
+                  icon="sap-icon://accept"
+                  validated="true">
+                  <form:SimpleForm
+                     title="{i18n>deliveryToTitle}"
+                     editable="false"
+                     layout="ResponsiveGridLayout"
+                     labelSpanXL="3"
+                     labelSpanL="3"
+                     labelSpanM="3"
+                     labelSpanS="12"
+                     columnsXL="1"
+                     columnsL="1"
+                     columnsM="1">
+                     <form:content>
+                        <Label text="{i18n>fullNameLabel}"/>
+                        <Text text="{checkout>/delivery/fullName}"/>
+                        <Label text="{i18n>phoneLabel}"/>
+                        <Text text="{checkout>/delivery/phone}"/>
+                        <Label text="{i18n>emailLabel}"/>
+                        <Text text="{= ${checkout>/delivery/email} || '-' }"/>
+                        <Label text="{i18n>addressLabel}"/>
+                        <Text text="{checkout>/delivery/address}, {checkout>/delivery/city}, {checkout>/delivery/state} - {checkout>/delivery/pinCode}"/>
+                        <Label text="{i18n>paymentMethodLabel}"/>
+                        <Text text="{
+                           path: 'checkout>/paymentMethod',
+                           formatter: 'Formatter.paymentMethodText.bind($controller)'
+                        }"/>
+                     </form:content>
+                  </form:SimpleForm>
+                  <core:Fragment
+                     fragmentName="ui5.shop.view.fragments.OrderSummary"
+                     type="XML"/>
+               </WizardStep>
+
+            </steps>
+         </Wizard>
+      </content>
+      <footer>
+         <OverflowToolbar>
+            <ToolbarSpacer/>
+            <Button
+               text="{i18n>cancelCheckout}"
+               press=".onCancel"/>
+         </OverflowToolbar>
+      </footer>
+   </Page>
+</mvc:View>

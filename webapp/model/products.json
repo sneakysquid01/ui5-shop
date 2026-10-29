@@ -1,0 +1,467 @@
+{
+  "Products": [
+    {
+      "productId": "P1001",
+      "name": "Wireless Headphones",
+      "category": "Audio",
+      "brand": "Sonora",
+      "shortDescription": "Over-ear, noise-cancelling, 30-hour battery",
+      "description": "Immerse yourself in rich, detailed sound with active noise cancellation that blocks out the world around you. Soft memory-foam ear cushions keep you comfortable for hours, and a single charge lasts up to 30 hours. Fold them flat for travel and switch between two devices seamlessly.",
+      "price": 4999,
+      "rating": 4.4,
+      "reviewCount": 1284,
+      "stock": 25,
+      "images": [
+        "images/products/P1001-1.jpg",
+        "images/products/P1001-2.jpg"
+      ],
+      "specifications": [
+        {
+          "name": "Colour",
+          "value": "Matte Black"
+        },
+        {
+          "name": "Battery life",
+          "value": "30 hours"
+        },
+        {
+          "name": "Connectivity",
+          "value": "Bluetooth 5.3"
+        },
+        {
+          "name": "Weight",
+          "value": "250 g"
+        },
+        {
+          "name": "Warranty",
+          "value": "1 year"
+        }
+      ]
+    },
+    {
+      "productId": "P1002",
+      "name": "Smart Watch",
+      "category": "Wearables",
+      "brand": "Pulse",
+      "shortDescription": "AMOLED display, heart-rate and sleep tracking",
+      "description": "Stay on top of your health and your day with a bright AMOLED display, round-the-clock heart-rate monitoring, sleep tracking and over 100 workout modes. Get notifications from your phone, track your steps, and enjoy up to 7 days of battery life on a single charge.",
+      "price": 6999,
+      "rating": 4.2,
+      "reviewCount": 876,
+      "stock": 18,
+      "images": [
+        "images/products/P1002-1.jpg",
+        "images/products/P1002-2.jpg",
+        "images/products/P1002-3.jpg"
+      ],
+      "specifications": [
+        {
+          "name": "Display",
+          "value": "1.43\" AMOLED"
+        },
+        {
+          "name": "Battery life",
+          "value": "Up to 7 days"
+        },
+        {
+          "name": "Water resistance",
+          "value": "5 ATM"
+        },
+        {
+          "name": "Sensors",
+          "value": "Heart rate, SpO2, accelerometer"
+        },
+        {
+          "name": "Warranty",
+          "value": "1 year"
+        }
+      ]
+    },
+    {
+      "productId": "P1003",
+      "name": "Bluetooth Speaker",
+      "category": "Audio",
+      "brand": "Sonora",
+      "shortDescription": "Portable, waterproof, deep bass",
+      "description": "Take the party anywhere with this rugged, waterproof speaker. Powerful drivers deliver deep bass and clear highs, while the 12-hour battery keeps the music going all day. Pair two speakers for stereo sound.",
+      "price": 2499,
+      "rating": 4.5,
+      "reviewCount": 2310,
+      "stock": 40,
+      "images": [
+        "images/products/P1003-1.jpg",
+        "images/products/P1003-2.jpg",
+        "images/products/P1003-3.jpg"
+      ],
+      "specifications": [
+        {
+          "name": "Output",
+          "value": "20 W"
+        },
+        {
+          "name": "Battery life",
+          "value": "12 hours"
+        },
+        {
+          "name": "Water resistance",
+          "value": "IPX7"
+        },
+        {
+          "name": "Connectivity",
+          "value": "Bluetooth 5.0, AUX"
+        },
+        {
+          "name": "Warranty",
+          "value": "1 year"
+        }
+      ]
+    },
+    {
+      "productId": "P1004",
+      "name": "Mechanical Keyboard",
+      "category": "Accessories",
+      "brand": "Keyforge",
+      "shortDescription": "RGB backlit, hot-swappable switches",
+      "description": "A compact 75% mechanical keyboard with hot-swappable switches, per-key RGB lighting and a solid aluminium frame. Connect by cable, Bluetooth or the 2.4 GHz receiver, and enjoy a satisfying typing feel for work and gaming.",
+      "price": 5499,
+      "rating": 4.6,
+      "reviewCount": 642,
+      "stock": 3,
+      "images": [
+        "images/products/P1004-1.jpg",
+        "images/products/P1004-2.jpg",
+        "images/products/P1004-3.jpg"
+      ],
+      "specifications": [
+        {
+          "name": "Layout",
+          "value": "75% (84 keys)"
+        },
+        {
+          "name": "Switches",
+          "value": "Hot-swappable, tactile"
+        },
+        {
+          "name": "Backlight",
+          "value": "Per-key RGB"
+        },
+        {
+          "name": "Connectivity",
+          "value": "USB-C, Bluetooth, 2.4 GHz"
+        },
+        {
+          "name": "Warranty",
+          "value": "1 year"
+        }
+      ]
+    },
+    {
+      "productId": "P1005",
+      "name": "Wireless Mouse",
+      "category": "Accessories",
+      "brand": "Keyforge",
+      "shortDescription": "Silent clicks, ergonomic, rechargeable",
+      "description": "An ergonomic wireless mouse with silent clicks, adjustable DPI up to 4000 and a rechargeable battery that lasts up to 70 days. Works on almost any surface and switches between three devices at the press of a button.",
+      "price": 1299,
+      "rating": 4.3,
+      "reviewCount": 1890,
+      "stock": 60,
+      "images": [
+        "images/products/P1005-1.jpg",
+        "images/products/P1005-2.jpg",
+        "images/products/P1005-3.jpg"
+      ],
+      "specifications": [
+        {
+          "name": "DPI",
+          "value": "800 - 4000"
+        },
+        {
+          "name": "Battery life",
+          "value": "Up to 70 days"
+        },
+        {
+          "name": "Buttons",
+          "value": "6"
+        },
+        {
+          "name": "Connectivity",
+          "value": "Bluetooth, 2.4 GHz"
+        },
+        {
+          "name": "Warranty",
+          "value": "1 year"
+        }
+      ]
+    },
+    {
+      "productId": "P1006",
+      "name": "4K Action Camera",
+      "category": "Cameras",
+      "brand": "Voltix",
+      "shortDescription": "4K60 video, image stabilisation, waterproof",
+      "description": "Capture every adventure in stunning 4K at 60 frames per second. Advanced image stabilisation keeps footage smooth, the camera is waterproof to 10 metres without a case, and the front screen helps you frame your vlogs perfectly.",
+      "price": 14999,
+      "rating": 4.1,
+      "reviewCount": 412,
+      "stock": 12,
+      "images": [
+        "images/products/P1006-1.jpg",
+        "images/products/P1006-2.jpg",
+        "images/products/P1006-3.jpg"
+      ],
+      "specifications": [
+        {
+          "name": "Video",
+          "value": "4K at 60 fps"
+        },
+        {
+          "name": "Photo",
+          "value": "20 MP"
+        },
+        {
+          "name": "Waterproof",
+          "value": "10 m without case"
+        },
+        {
+          "name": "Screens",
+          "value": "Front and rear"
+        },
+        {
+          "name": "Warranty",
+          "value": "1 year"
+        }
+      ]
+    },
+    {
+      "productId": "P1007",
+      "name": "Fitness Band",
+      "category": "Wearables",
+      "brand": "Pulse",
+      "shortDescription": "Lightweight, step and sleep tracking",
+      "description": "A slim, lightweight fitness band that tracks your steps, heart rate and sleep. The colour display shows notifications at a glance, and the battery lasts up to 14 days so you can wear it day and night.",
+      "price": 1999,
+      "rating": 4,
+      "reviewCount": 3105,
+      "stock": 0,
+      "images": [
+        "images/products/P1007-1.jpg"
+      ],
+      "specifications": [
+        {
+          "name": "Display",
+          "value": "1.1\" colour"
+        },
+        {
+          "name": "Battery life",
+          "value": "Up to 14 days"
+        },
+        {
+          "name": "Water resistance",
+          "value": "5 ATM"
+        },
+        {
+          "name": "Sensors",
+          "value": "Heart rate, accelerometer"
+        },
+        {
+          "name": "Warranty",
+          "value": "6 months"
+        }
+      ]
+    },
+    {
+      "productId": "P1008",
+      "name": "Power Bank 20000 mAh",
+      "category": "Accessories",
+      "brand": "Voltix",
+      "shortDescription": "Fast charging, charges 3 devices at once",
+      "description": "Never run out of battery again. This 20000 mAh power bank supports 22.5 W fast charging and can charge three devices at the same time through two USB-A ports and one USB-C port. A clear LED display shows the remaining charge.",
+      "price": 1799,
+      "rating": 4.4,
+      "reviewCount": 2750,
+      "stock": 35,
+      "images": [
+        "images/products/P1008-1.jpg"
+      ],
+      "specifications": [
+        {
+          "name": "Capacity",
+          "value": "20000 mAh"
+        },
+        {
+          "name": "Output",
+          "value": "22.5 W fast charge"
+        },
+        {
+          "name": "Ports",
+          "value": "2 x USB-A, 1 x USB-C"
+        },
+        {
+          "name": "Weight",
+          "value": "380 g"
+        },
+        {
+          "name": "Warranty",
+          "value": "1 year"
+        }
+      ]
+    },
+    {
+      "productId": "P1009",
+      "name": "Noise-Cancelling Earbuds",
+      "category": "Audio",
+      "brand": "Sonora",
+      "shortDescription": "True wireless, ANC, pocket-size case",
+      "description": "True wireless earbuds with active noise cancellation, transparency mode and crystal-clear calls. The pocket-size charging case gives you up to 28 hours of total listening time, and the earbuds are sweat-resistant for workouts.",
+      "price": 3499,
+      "rating": 4.3,
+      "reviewCount": 1542,
+      "stock": 22,
+      "images": [
+        "images/products/P1009-1.jpg",
+        "images/products/P1009-2.jpg",
+        "images/products/P1009-3.jpg",
+        "images/products/P1009-4.jpg"
+      ],
+      "specifications": [
+        {
+          "name": "Noise cancellation",
+          "value": "Active (ANC)"
+        },
+        {
+          "name": "Battery life",
+          "value": "7 h + 21 h with case"
+        },
+        {
+          "name": "Water resistance",
+          "value": "IPX4"
+        },
+        {
+          "name": "Connectivity",
+          "value": "Bluetooth 5.3"
+        },
+        {
+          "name": "Warranty",
+          "value": "1 year"
+        }
+      ]
+    },
+    {
+      "productId": "P1010",
+      "name": "Gaming Headset",
+      "category": "Gaming",
+      "brand": "Keyforge",
+      "shortDescription": "7.1 surround sound, detachable mic",
+      "description": "Hear every footstep with virtual 7.1 surround sound. The detachable noise-reducing microphone keeps your voice clear, and breathable ear cushions stay comfortable through long gaming sessions. Works with PC, console and mobile.",
+      "price": 3999,
+      "rating": 4.2,
+      "reviewCount": 968,
+      "stock": 15,
+      "images": [
+        "images/products/P1010-1.jpg",
+        "images/products/P1010-2.jpg",
+        "images/products/P1010-3.jpg"
+      ],
+      "specifications": [
+        {
+          "name": "Sound",
+          "value": "Virtual 7.1 surround"
+        },
+        {
+          "name": "Microphone",
+          "value": "Detachable, noise-reducing"
+        },
+        {
+          "name": "Connectivity",
+          "value": "USB, 3.5 mm jack"
+        },
+        {
+          "name": "Compatibility",
+          "value": "PC, console, mobile"
+        },
+        {
+          "name": "Warranty",
+          "value": "1 year"
+        }
+      ]
+    },
+    {
+      "productId": "P1011",
+      "name": "Portable SSD 1 TB",
+      "category": "Storage",
+      "brand": "Voltix",
+      "shortDescription": "Up to 1050 MB/s, shock-resistant",
+      "description": "Move large files in seconds with read speeds of up to 1050 MB/s. This pocket-size SSD is shock-resistant, works with laptops, phones and consoles, and comes with both USB-C and USB-A cables.",
+      "price": 7499,
+      "rating": 4.7,
+      "reviewCount": 734,
+      "stock": 9,
+      "images": [
+        "images/products/P1011-1.jpg",
+        "images/products/P1011-2.jpg",
+        "images/products/P1011-3.jpg"
+      ],
+      "specifications": [
+        {
+          "name": "Capacity",
+          "value": "1 TB"
+        },
+        {
+          "name": "Read speed",
+          "value": "Up to 1050 MB/s"
+        },
+        {
+          "name": "Interface",
+          "value": "USB 3.2 Gen 2"
+        },
+        {
+          "name": "Weight",
+          "value": "58 g"
+        },
+        {
+          "name": "Warranty",
+          "value": "3 years"
+        }
+      ]
+    },
+    {
+      "productId": "P1012",
+      "name": "USB-C Hub 7-in-1",
+      "category": "Accessories",
+      "brand": "Voltix",
+      "shortDescription": "HDMI 4K, USB 3.0, SD card, 100 W charging",
+      "description": "Turn one USB-C port into seven. Connect a 4K monitor over HDMI, plug in USB drives, read SD and microSD cards, and keep your laptop charged with 100 W pass-through power, all from one compact aluminium hub.",
+      "price": 2299,
+      "rating": 4.1,
+      "reviewCount": 1120,
+      "stock": 28,
+      "images": [
+        "images/products/P1012-1.jpg",
+        "images/products/P1012-2.jpg"
+      ],
+      "specifications": [
+        {
+          "name": "Ports",
+          "value": "HDMI, 3 x USB-A, SD, microSD, USB-C PD"
+        },
+        {
+          "name": "Video",
+          "value": "4K at 30 Hz"
+        },
+        {
+          "name": "Charging",
+          "value": "100 W pass-through"
+        },
+        {
+          "name": "Material",
+          "value": "Aluminium"
+        },
+        {
+          "name": "Warranty",
+          "value": "1 year"
+        }
+      ]
+    }
+  ]
+}
